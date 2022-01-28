@@ -11,6 +11,7 @@ FreqTables = "da1fdf0e-e0ff-5433-a45f-9bb5ff651cb1"
 Glob = "c27321d9-0574-5035-807b-f59d2c89b15c"
 
 [compat]
+Glob = "1"
 julia = "1"
 
 [extras]
