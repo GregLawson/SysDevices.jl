@@ -32,7 +32,8 @@ Example: rows(TableRoot("/sys/bus/usb/devices", r"^[-0-9.]+")) on a Linux system
 """
 function rows(table_root::TableRoot)::Vector{RowRoot}
     map(glob([table_root.filter], table_root.path)) do row_filename
-        RowRoot(table_root, row_filename)
+        RowRoot(table_root, row_filename[length(table_root.path)+2:end])
+        #RowRoot(table_root, row_filename[1:end])
     end
 end # rows
 
@@ -149,6 +150,7 @@ end # column_names
 
 function dict(row_root::RowRoot, column_names::Vector{String})
     ret = Dict()
+    ret["row_path"] = row_root.row_filename
     for column_subpath in column_names
         cell = Cell(row_root, column_subpath)
         ret[column_subpath] = cell_value(cell)
